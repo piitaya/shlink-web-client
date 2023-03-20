@@ -48,7 +48,7 @@ describe('<ShortUrlsRow />', () => {
       maxVisits: null,
     },
   };
-  const ShortUrlsRow = createShortUrlsRow(() => <span>ShortUrlsRowMenu</span>, colorGeneratorMock, useTimeoutToggle);
+  const ShortUrlsRow = createShortUrlsRow(() => <span>ShortUrlsRowMenu</span>, () => <span>ShortUrlsRowQrCode</span>, colorGeneratorMock, useTimeoutToggle);
 
   const setUp = ({ title, tags = [], meta = {}, settings = {} }: SetUpOptions = {}, search = '') => {
     (useLocation as any).mockReturnValue({ search });

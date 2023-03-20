@@ -117,16 +117,19 @@ export const ShortUrlForm = (
   );
   const basicComponents = (
     <>
-      <FormGroup>
-        <Input
-          bsSize="lg"
-          type="url"
-          placeholder="URL to be shortened"
-          required
-          value={shortUrlData.longUrl}
-          onChange={(e) => setShortUrlData({ ...shortUrlData, longUrl: e.target.value })}
-        />
-      </FormGroup>
+      <Row>
+        <FormGroup className={isBasicMode ? 'col-lg-6 mb-3' : 'col-12'}>
+          <Input
+            bsSize="lg"
+            type="url"
+            placeholder="URL to be shortened"
+            required
+            value={shortUrlData.longUrl}
+            onChange={(e) => setShortUrlData({ ...shortUrlData, longUrl: e.target.value })}
+          />
+        </FormGroup>
+        {isBasicMode && renderOptionalInput('title', 'Title', 'text', { bsSize: 'lg' }, { className: 'col-lg-6' })}
+      </Row>
       <Row>
         {isBasicMode && renderOptionalInput('customSlug', 'Custom slug', 'text', { bsSize: 'lg' }, { className: 'col-lg-6' })}
         <div className={isBasicMode ? 'col-lg-6 mb-3' : 'col-12'}>

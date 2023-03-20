@@ -9,6 +9,7 @@ import { ExportShortUrlsBtn } from '../helpers/ExportShortUrlsBtn';
 import { QrCodeModal } from '../helpers/QrCodeModal';
 import { ShortUrlsRow } from '../helpers/ShortUrlsRow';
 import { ShortUrlsRowMenu } from '../helpers/ShortUrlsRowMenu';
+import { ShortUrlsRowQrCode } from '../helpers/ShortUrlsRowQrCode';
 import { createShortUrl, shortUrlCreationReducerCreator } from '../reducers/shortUrlCreation';
 import { deleteShortUrl, shortUrlDeleted, shortUrlDeletionReducerCreator } from '../reducers/shortUrlDeletion';
 import { shortUrlDetailReducerCreator } from '../reducers/shortUrlDetail';
@@ -29,10 +30,11 @@ export const provideServices = (bottle: Bottle, connect: ConnectDecorator) => {
 
   bottle.serviceFactory('ShortUrlsTable', ShortUrlsTable, 'ShortUrlsRow');
 
-  bottle.serviceFactory('ShortUrlsRow', ShortUrlsRow, 'ShortUrlsRowMenu', 'ColorGenerator', 'useTimeoutToggle');
+  bottle.serviceFactory('ShortUrlsRow', ShortUrlsRow, 'ShortUrlsRowMenu', 'ShortUrlsRowQrCode', 'ColorGenerator', 'useTimeoutToggle');
   bottle.decorator('ShortUrlsRow', connect(['settings']));
 
   bottle.serviceFactory('ShortUrlsRowMenu', ShortUrlsRowMenu, 'DeleteShortUrlModal', 'QrCodeModal');
+  bottle.serviceFactory('ShortUrlsRowQrCode', ShortUrlsRowQrCode, 'QrCodeModal');
   bottle.serviceFactory('CreateShortUrlResult', CreateShortUrlResult, 'useTimeoutToggle');
   bottle.serviceFactory('ShortUrlForm', ShortUrlForm, 'TagsSelector', 'DomainSelector');
 

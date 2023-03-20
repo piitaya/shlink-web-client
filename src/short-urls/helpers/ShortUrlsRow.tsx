@@ -5,15 +5,16 @@ import type { SelectedServer } from '../../servers/data';
 import type { Settings } from '../../settings/reducers/settings';
 import { CopyToClipboardIcon } from '../../utils/CopyToClipboardIcon';
 import { Time } from '../../utils/dates/Time';
-import type { TimeoutToggle } from '../../utils/helpers/hooks';
+import { TimeoutToggle } from '../../utils/helpers/hooks';
 import type { ColorGenerator } from '../../utils/services/ColorGenerator';
 import type { ShortUrl } from '../data';
 import { useShortUrlsQuery } from './hooks';
+import './ShortUrlsRow.scss';
 import type { ShortUrlsRowMenuType } from './ShortUrlsRowMenu';
+import { ShortUrlsRowQrCodeType } from './ShortUrlsRowQrCode';
 import { ShortUrlStatus } from './ShortUrlStatus';
 import { ShortUrlVisitsCount } from './ShortUrlVisitsCount';
 import { Tags } from './Tags';
-import './ShortUrlsRow.scss';
 
 interface ShortUrlsRowProps {
   onTagClick?: (tag: string) => void;
@@ -29,6 +30,7 @@ export type ShortUrlsRowType = FC<ShortUrlsRowProps>;
 
 export const ShortUrlsRow = (
   ShortUrlsRowMenu: ShortUrlsRowMenuType,
+  ShortUrlsRowQrCode: ShortUrlsRowQrCodeType,
   colorGenerator: ColorGenerator,
   useTimeoutToggle: TimeoutToggle,
 ) => ({ shortUrl, selectedServer, onTagClick, settings }: ShortUrlsRowConnectProps) => {
@@ -86,6 +88,9 @@ export const ShortUrlsRow = (
       </td>
       <td className="responsive-table__cell short-urls-row__cell" data-th="Status">
         <ShortUrlStatus shortUrl={shortUrl} />
+      </td>
+      <td className="responsive-table__cell short-urls-row__cell" data-th="QR Code">
+        <ShortUrlsRowQrCode shortUrl={shortUrl} />
       </td>
       <td className="responsive-table__cell short-urls-row__cell">
         <ShortUrlsRowMenu selectedServer={selectedServer} shortUrl={shortUrl} />
